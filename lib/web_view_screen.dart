@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -31,6 +32,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   int _currentIndex = 0;
 
   String get baseUrl => EnvironmentConfig.baseUrl;
+  bool get isDevelopment => EnvironmentConfig.environment != Environment.prod;
 
   final List<NavigationItem> _pages = [
     NavigationItem(
@@ -162,23 +164,6 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   Future<void> _handleLoginRequest() async {
     try {
-      // Initiate the Google Sign-In flow
-      await _launchGoogleSignIn();
-
-      // Get the cookies after successful login
-      final cookies = await CookieManager.instance().getCookies(url: WebUri(baseUrl));
-
-      // Pass the cookies back to the JavaScript bridge
-      await sendToWebView('login-success', cookies);
-    } catch (e, stackTrace) {
-      // Handle any errors
-      developer.log('Error handling login request', name: 'WebView', error: e, stackTrace: stackTrace);
-      await sendToWebView('login-error', {'error': e.toString()});
-    }
-  }
-
-  Future<void> _launchGoogleSignIn() async {
-    try {
       final url = "${baseUrl}/auth/signin?callbackUrl=${Uri.decodeFull("${baseUrl}/auth/mobile-login")}";
       final callbackUrlScheme = "yourapp";
 
@@ -256,6 +241,33 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    var inAppWebViewSettings = InAppWebViewSettings(
+        mediaPlaybackRequiresUserGesture: false,
+        allowsInlineMediaPlayback: true,
+        javaScriptEnabled: true,
+        useShouldOverrideUrlLoading: true,
+        thirdPartyCookiesEnabled: true,
+        domStorageEnabled: true,
+        databaseEnabled: true,
+        cacheEnabled: true,
+        cacheMode: CacheMode.LOAD_DEFAULT,
+        supportMultipleWindows: true,
+
+        // debug
+        isInspectable: true,
+        allowFileAccessFromFileURLs: true,
+        allowUniversalAccessFromFileURLs: true,
+        mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW
+    );
+
+    if(isDevelopment) {
+      inAppWebViewSettings.isInspectable = true;
+      inAppWebViewSettings.allowFileAccessFromFileURLs = true;
+      inAppWebViewSettings.allowUniversalAccessFromFileURLs = true;
+      inAppWebViewSettings.mixedContentMode = MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW;
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -264,24 +276,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
               initialUrlRequest: URLRequest(
                   url: WebUri('$baseUrl${_pages[0].route}')
               ),
-              initialSettings: InAppWebViewSettings(
-                mediaPlaybackRequiresUserGesture: false,
-                allowsInlineMediaPlayback: true,
-                javaScriptEnabled: true,
-                useShouldOverrideUrlLoading: true,
-                thirdPartyCookiesEnabled: true,
-                domStorageEnabled: true,
-                databaseEnabled: true,
-                cacheEnabled: true,
-                cacheMode: CacheMode.LOAD_DEFAULT,
-                supportMultipleWindows: true,
-
-                // debug
-                isInspectable: true,
-                allowFileAccessFromFileURLs: true,
-                allowUniversalAccessFromFileURLs: true,
-                mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW
-              ),
+              initialSettings: inAppWebViewSettings,
               pullToRefreshController: pullToRefreshController,
               onWebViewCreated: (controller) {
                 _webViewController = controller;
