@@ -165,7 +165,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   Future<void> _handleLoginRequest() async {
     try {
       final url = "${baseUrl}/auth/signin?callbackUrl=${Uri.decodeFull("${baseUrl}/auth/mobile-login")}";
-      final callbackUrlScheme = "yourapp";
+      final callbackUrlScheme = "com.spacemate.app";
 
       if (Platform.isIOS) {
         // Use flutter_web_auth for iOS as it handles the flow better on iOS

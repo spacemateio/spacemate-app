@@ -31,7 +31,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="yourapp" android:host="callback" />
+                <data android:scheme="com.spacemate.app" android:host="callback" />
             </intent-filter>
         </activity>
 <!--        <activity
