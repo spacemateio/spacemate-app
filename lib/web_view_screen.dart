@@ -253,13 +253,11 @@ class _WebViewScreenState extends State<WebViewScreen> {
         cacheEnabled: true,
         cacheMode: CacheMode.LOAD_DEFAULT,
         supportMultipleWindows: true,
-
-        // debug
-        isInspectable: true,
-        allowFileAccessFromFileURLs: true,
-        allowUniversalAccessFromFileURLs: true,
-        mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW
     );
+
+    if(Platform.isAndroid) {
+      inAppWebViewSettings.mixedContentMode = MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW;
+    }
 
     if(isDevelopment) {
       inAppWebViewSettings.isInspectable = true;

@@ -4,7 +4,7 @@ import 'package:web_view/web_view_screen.dart';
 import 'environment_config.dart';
 
 Future<void> main() async {
-  EnvironmentConfig.environment = Environment.test;  // or test, or prod
+  EnvironmentConfig.environment = Environment.prod;  // or test, or prod
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
