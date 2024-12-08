@@ -163,6 +163,8 @@ class _WebViewScreenState extends State<WebViewScreen> {
   }
 
   Future<void> _handleLoginRequest() async {
+    _onItemTapped(0);
+
     try {
       final url = "${baseUrl}/auth/signin?callbackUrl=${Uri.decodeFull("${baseUrl}/auth/mobile-login")}";
       final callbackUrlScheme = "com.spacemate.app";

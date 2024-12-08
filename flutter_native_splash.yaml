@@ -1,14 +1,22 @@
 flutter_native_splash:
   color: "#FFFFFF"
   image: assets/img/splash-screen.png
+
   android_12:
     image: assets/img/splash-screen.png
     color: "#FFFFFF"
+    icon_background_color: "#FFFFFF"
 
   android: true
   ios: true
   web: false
 
-  android_gravity: center
-  ios_content_mode: scaleAspectFit
+  # Change these parameters for better tablet support
+  android_gravity: center_horizontal # or 'fill' if you want it to stretch
+  ios_content_mode: center
+
+  # Make sure image is properly sized
+  branding_mode: bottom
+
+  # Remove fullscreen to avoid scaling issues
   fullscreen: false
