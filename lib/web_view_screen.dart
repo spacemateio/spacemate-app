@@ -135,6 +135,9 @@ class _WebViewScreenState extends State<WebViewScreen> {
         case 'login':
           _handleLoginRequest();
           break;
+        case 'logout':
+          _handleLogoutRequest();
+          break;
         // Handle other message types as needed
         default:
           break;
@@ -153,13 +156,17 @@ class _WebViewScreenState extends State<WebViewScreen> {
     await sendToWebView('navigation', {'route': _pages[index].route});
   }
 
+  Future<void> _handleLogoutRequest() async {
+    _onItemTapped(0);
+  }
+
   Future<void> _handleLoginRequest() async {
     _onItemTapped(0);
 
     try {
       final url =
           "$baseUrl/auth/signin?callbackUrl=${Uri.decodeFull("$baseUrl/auth/mobile-login")}";
-      const callbackUrlScheme = "com.spacemate.android";
+      const callbackUrlScheme = "com.spacemate.app";
 
       if (Platform.isIOS) {
         // Use flutter_web_auth for iOS as it handles the flow better on iOS
