@@ -12,3 +12,11 @@ storeFile=keystorespacemate.keystore
 ## Android SigningReport
 ./gradlew signingReport
 keytool -keystore keystorespacemate.keystore -list -v
+
+## Native build APK
+
+./gradlew assembleRelease
+
+## Native app bundle
+
+./gradlew bundleRelease
