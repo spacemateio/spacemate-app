@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+# Keep drawable resources
+!app/src/main/res/drawable/
+!app/src/main/res/drawable/splash_screen.png

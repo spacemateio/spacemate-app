@@ -17,4 +17,21 @@
         <!-- Background color -->
         <item name="android:windowBackground">@android:color/white</item>
     </style>
+    
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Pure white background -->
+        <item name="windowSplashScreenBackground">@android:color/white</item>
+        
+        <!-- Use the new high-quality logo -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/spacemate_logo_full</item>
+        
+        <!-- Hide status bar for cleaner look -->
+        <item name="android:windowFullscreen">true</item>
+        
+        <!-- Smooth animation -->
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        
+        <!-- Main theme -->
+        <item name="postSplashScreenTheme">@style/Theme.SpaceMate</item>
+    </style>
 </resources>

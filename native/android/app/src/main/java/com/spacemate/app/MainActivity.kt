@@ -10,12 +10,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.spacemate.app.config.EnvironmentConfig
 import com.spacemate.app.config.Environment
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : AppCompatActivity() {
     private lateinit var webViewFragment: WebViewFragment
     private lateinit var bottomNavigation: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+        
+        // Optional: Keep splash screen shown for longer if needed
+        splashScreen.setKeepOnScreenCondition { 
+            // Return false to dismiss splash screen immediately
+            false 
+        }
+        
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
