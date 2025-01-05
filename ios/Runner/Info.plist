@@ -61,7 +61,7 @@
 			<dict>
 				<key>CFBundleURLSchemes</key>
 				<array>
-					<string>com.spacemate.app</string>
+					<string>com.spacemate.ios</string>
 				</array>
 			</dict>
 		</array>

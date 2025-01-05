@@ -36,7 +36,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   final List<NavigationItem> _pages = [
     NavigationItem(
-      icon:'assets/icons/explore.svg',
+      icon: 'assets/icons/explore.svg',
       label: 'Explore',
       route: '/storage',
     ),
@@ -95,7 +95,8 @@ class _WebViewScreenState extends State<WebViewScreen> {
                 path: '/',
               );
             } catch (e) {
-              developer.log('Error setting cookie ${entry.key}: $e', name: 'WebView');
+              developer.log('Error setting cookie ${entry.key}: $e',
+                  name: 'WebView');
             }
           }
         }
@@ -115,17 +116,13 @@ class _WebViewScreenState extends State<WebViewScreen> {
       final escapedMessage = message.replaceAll("'", "\\'");
 
       await _webViewController?.evaluateJavascript(
-          source: "window.dispatchEvent(new CustomEvent('fromFlutter', { detail: JSON.parse('$escapedMessage') }));"
-      );
+          source:
+              "window.dispatchEvent(new CustomEvent('fromFlutter', { detail: JSON.parse('$escapedMessage') }));");
 
       developer.log('Sent message to WebView: $message', name: 'WebView');
     } catch (e, stackTrace) {
-      developer.log(
-          'Error sending message to WebView',
-          name: 'WebView',
-          error: e,
-          stackTrace: stackTrace
-      );
+      developer.log('Error sending message to WebView',
+          name: 'WebView', error: e, stackTrace: stackTrace);
     }
   }
 
@@ -138,17 +135,13 @@ class _WebViewScreenState extends State<WebViewScreen> {
         case 'login':
           _handleLoginRequest();
           break;
-      // Handle other message types as needed
+        // Handle other message types as needed
         default:
           break;
       }
     } catch (e, stackTrace) {
-      developer.log(
-          'Error handling message',
-          name: 'WebView',
-          error: e,
-          stackTrace: stackTrace
-      );
+      developer.log('Error handling message',
+          name: 'WebView', error: e, stackTrace: stackTrace);
     }
   }
 
@@ -157,30 +150,29 @@ class _WebViewScreenState extends State<WebViewScreen> {
       _currentIndex = index;
     });
 
-    await sendToWebView('navigation', {
-      'route': _pages[index].route
-    });
+    await sendToWebView('navigation', {'route': _pages[index].route});
   }
 
   Future<void> _handleLoginRequest() async {
     _onItemTapped(0);
 
     try {
-      final url = "${baseUrl}/auth/signin?callbackUrl=${Uri.decodeFull("${baseUrl}/auth/mobile-login")}";
-      final callbackUrlScheme = "com.spacemate.app";
+      final url =
+          "$baseUrl/auth/signin?callbackUrl=${Uri.decodeFull("$baseUrl/auth/mobile-login")}";
+      const callbackUrlScheme = "com.spacemate.android";
 
       if (Platform.isIOS) {
         // Use flutter_web_auth for iOS as it handles the flow better on iOS
         final result = await FlutterWebAuth.authenticate(
-            url: url,
-            callbackUrlScheme: callbackUrlScheme,
+          url: url,
+          callbackUrlScheme: callbackUrlScheme,
         );
 
         final token = Uri.parse(result).queryParameters['token'];
         if (token != null) {
           await _webViewController?.loadUrl(
-              urlRequest: URLRequest(url: WebUri("$baseUrl/auth/mobile-success?auth=$token"))
-          );
+              urlRequest: URLRequest(
+                  url: WebUri("$baseUrl/auth/mobile-success?auth=$token")));
 
           setState(() {
             _currentIndex = 0;
@@ -218,8 +210,8 @@ class _WebViewScreenState extends State<WebViewScreen> {
             final token = Uri.parse(result).queryParameters['token'];
             if (token != null) {
               await _webViewController?.loadUrl(
-                  urlRequest: URLRequest(url: WebUri("$baseUrl/auth/mobile-success?auth=$token"))
-              );
+                  urlRequest: URLRequest(
+                      url: WebUri("$baseUrl/auth/mobile-success?auth=$token")));
 
               setState(() {
                 _currentIndex = 0;
@@ -234,8 +226,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
     } catch (e) {
       developer.log('Error during authentication: $e', error: e);
       await _webViewController?.loadUrl(
-          urlRequest: URLRequest(url: WebUri("$baseUrl/storage"))
-      );
+          urlRequest: URLRequest(url: WebUri("$baseUrl/storage")));
       _onItemTapped(0);
       rethrow;
     }
@@ -243,29 +234,30 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     var inAppWebViewSettings = InAppWebViewSettings(
-        mediaPlaybackRequiresUserGesture: false,
-        allowsInlineMediaPlayback: true,
-        javaScriptEnabled: true,
-        useShouldOverrideUrlLoading: true,
-        thirdPartyCookiesEnabled: true,
-        domStorageEnabled: true,
-        databaseEnabled: true,
-        cacheEnabled: true,
-        cacheMode: CacheMode.LOAD_DEFAULT,
-        supportMultipleWindows: true,
+      mediaPlaybackRequiresUserGesture: false,
+      allowsInlineMediaPlayback: true,
+      javaScriptEnabled: true,
+      useShouldOverrideUrlLoading: true,
+      thirdPartyCookiesEnabled: true,
+      domStorageEnabled: true,
+      databaseEnabled: true,
+      cacheEnabled: true,
+      cacheMode: CacheMode.LOAD_DEFAULT,
+      supportMultipleWindows: true,
     );
 
-    if(Platform.isAndroid) {
-      inAppWebViewSettings.mixedContentMode = MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW;
+    if (Platform.isAndroid) {
+      inAppWebViewSettings.mixedContentMode =
+          MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW;
     }
 
-    if(isDevelopment) {
+    if (isDevelopment) {
       inAppWebViewSettings.isInspectable = true;
       inAppWebViewSettings.allowFileAccessFromFileURLs = true;
       inAppWebViewSettings.allowUniversalAccessFromFileURLs = true;
-      inAppWebViewSettings.mixedContentMode = MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW;
+      inAppWebViewSettings.mixedContentMode =
+          MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW;
     }
 
     return Scaffold(
@@ -273,9 +265,8 @@ class _WebViewScreenState extends State<WebViewScreen> {
         child: Stack(
           children: [
             InAppWebView(
-              initialUrlRequest: URLRequest(
-                  url: WebUri('$baseUrl${_pages[0].route}')
-              ),
+              initialUrlRequest:
+                  URLRequest(url: WebUri('$baseUrl${_pages[0].route}')),
               initialSettings: inAppWebViewSettings,
               pullToRefreshController: pullToRefreshController,
               onWebViewCreated: (controller) {
@@ -306,8 +297,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
                 developer.log(
                     'Load Error: type=${error.type}, description=${error.description}, url=${request.url.toString()}',
                     name: 'WebView',
-                    error: error.description
-                );
+                    error: error.description);
               },
               onReceivedHttpError: (controller, request, errorResponse) {
                 pullToRefreshController?.endRefreshing();
@@ -315,18 +305,17 @@ class _WebViewScreenState extends State<WebViewScreen> {
                 developer.log(
                     'HTTP Error: statusCode=${errorResponse.statusCode}, description=${errorResponse.reasonPhrase}, url=${request.url.toString()}',
                     name: 'WebView',
-                    error: errorResponse.reasonPhrase
-                );
+                    error: errorResponse.reasonPhrase);
               },
               onPermissionRequest: (controller, request) async {
                 return PermissionResponse(
                     resources: request.resources,
-                    action: PermissionResponseAction.GRANT
-                );
+                    action: PermissionResponseAction.GRANT);
               },
               onLoadResource: (controller, resource) async {
                 if (resource.url != null) {
-                  final cookies = await CookieManager.instance().getCookies(url: resource.url!);
+                  final cookies = await CookieManager.instance()
+                      .getCookies(url: resource.url!);
                   developer.log("URL: ${resource.url}");
                   developer.log("Cookies Detail:");
                   for (var cookie in cookies) {
@@ -354,14 +343,16 @@ class _WebViewScreenState extends State<WebViewScreen> {
                   children: [
                     Image.asset(
                       'assets/img/splash-screen.png',
-                      width: MediaQuery.of(context).size.width * 0.8, // 80% of screen width
+                      width: MediaQuery.of(context).size.width *
+                          0.8, // 80% of screen width
                       // or you can use a fixed larger size like:
                       // width: 300, // adjust this value to match your splash screen
                       fit: BoxFit.contain,
                     ),
                     const SizedBox(height: 20),
                     const CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF4c4ddc)),
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(Color(0xFF4c4ddc)),
                     ),
                   ],
                 ),
@@ -384,24 +375,25 @@ class _WebViewScreenState extends State<WebViewScreen> {
           selectedItemColor: const Color(0xFF4c4ddc),
           unselectedItemColor: const Color(0xFF878787),
           backgroundColor: Colors.white,
-          elevation: 0,  // Changed to 0 since we're using custom border
+          elevation: 0, // Changed to 0 since we're using custom border
           selectedFontSize: 12,
           unselectedFontSize: 12,
           onTap: _onItemTapped,
-          items: _pages.map((page) => BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              page.icon,
-              width: 32,
-              height: 32,
-              colorFilter: ColorFilter.mode(
-                  _currentIndex == _pages.indexOf(page)
-                      ? const Color(0xFF4c4ddc)
-                      : const Color(0xFF878787),
-                  BlendMode.srcIn
-              ),
-            ),
-            label: page.label,
-          )).toList(),
+          items: _pages
+              .map((page) => BottomNavigationBarItem(
+                    icon: SvgPicture.asset(
+                      page.icon,
+                      width: 32,
+                      height: 32,
+                      colorFilter: ColorFilter.mode(
+                          _currentIndex == _pages.indexOf(page)
+                              ? const Color(0xFF4c4ddc)
+                              : const Color(0xFF878787),
+                          BlendMode.srcIn),
+                    ),
+                    label: page.label,
+                  ))
+              .toList(),
         ),
       ),
     );

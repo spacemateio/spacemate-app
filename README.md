@@ -1,16 +1,14 @@
-# web_view
+### Android Release KeyStore - Command
 
-A new Flutter project.
+keytool -genkey -v -keystore keystorespacemate.keystore -alias spacemate-key-alias -keyalg RSA -keysize 2048 -validity 10000
 
-## Getting Started
+### Android Release Key Properties
 
-This project is a starting point for a Flutter application.
+storePassword=spacemate
+keyPassword=spacemate
+keyAlias=spacemate-key-alias
+storeFile=keystorespacemate.keystore
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Android SigningReport
+./gradlew signingReport
+keytool -keystore keystorespacemate.keystore -list -v
