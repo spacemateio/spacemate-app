@@ -1,4 +1,4 @@
-package com.spacemate.app
+package com.spacemate.android
 
 import android.annotation.SuppressLint
 import android.content.Intent

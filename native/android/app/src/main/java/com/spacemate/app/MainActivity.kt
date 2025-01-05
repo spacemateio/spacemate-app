@@ -1,4 +1,4 @@
-package com.spacemate.app
+package com.spacemate.android
 
 import android.content.Intent
 import android.os.Bundle

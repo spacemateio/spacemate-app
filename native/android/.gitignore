@@ -13,6 +13,14 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Release files
+/app/release
+*.aab
+*.apk
+/app/debug
+key.properties
+
 # Keep drawable resources
 !app/src/main/res/drawable/
-!app/src/main/res/drawable/splash_screen.png
+!app/src/main/res/drawable/spacemate_logo_full.png
