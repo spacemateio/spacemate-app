@@ -1,49 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_view/web_view_screen.dart';
-
+import 'package:web_view/screens/terms_screen.dart';
 import 'environment_config.dart';
 
 Future<void> main() async {
   EnvironmentConfig.environment = Environment.prod;  // or test, or prod
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  
+  // Check if user has agreed to terms
+  final prefs = await SharedPreferences.getInstance();
+  final hasAgreedToTerms = prefs.getBool('has_agreed_to_terms') ?? false;
+  
+  runApp(MyApp(hasAgreedToTerms: hasAgreedToTerms));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool hasAgreedToTerms;
+  
+  const MyApp({super.key, required this.hasAgreedToTerms});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'SpaceMate',
       theme: ThemeData(
-        colorScheme: const ColorScheme.light(
-          surface: Colors.white,
-        ),
-        scaffoldBackgroundColor: Colors.white,
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const WebViewScreen(
-        cookies: {
-          'deviceType': 'mobile',
-        },
-      ),
+      home: hasAgreedToTerms 
+        ? const WebViewScreen(cookies: {'deviceType': 'mobile'})
+        : const TermsScreen(),
     );
   }
 }

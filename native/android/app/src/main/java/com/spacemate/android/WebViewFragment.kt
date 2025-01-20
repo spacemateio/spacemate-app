@@ -12,7 +12,7 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import android.util.Log
 import org.json.JSONObject
-import com.spacemate.app.config.EnvironmentConfig
+import com.spacemate.android.config.EnvironmentConfig
 
 class WebViewFragment : Fragment() {
     private var webView: WebView? = null

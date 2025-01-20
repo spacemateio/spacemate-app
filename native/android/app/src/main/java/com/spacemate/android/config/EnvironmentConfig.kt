@@ -1,4 +1,4 @@
-package com.spacemate.app.config
+package com.spacemate.android.config
 
 enum class Environment {
     DEV, TEST, PROD

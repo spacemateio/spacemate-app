@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
-import com.spacemate.app.config.EnvironmentConfig
-import com.spacemate.app.config.Environment
+import com.spacemate.android.config.EnvironmentConfig
+import com.spacemate.android.config.Environment
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import android.os.Handler
 import android.os.Looper
