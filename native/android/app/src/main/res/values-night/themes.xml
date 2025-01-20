@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.SpaceMate" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.SpaceMate" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary</item>
@@ -15,6 +15,16 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         
         <!-- Background color -->
-        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        
+        <!-- Force light mode -->
+        <item name="android:forceDarkAllowed">false</item>
+    </style>
+
+    <style name="Theme.SpaceMate.ForceLightMode">
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowBackground">@android:color/white</item>
     </style>
 </resources> 

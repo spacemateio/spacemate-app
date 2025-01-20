@@ -15,7 +15,7 @@
         <activity
             android:name=".StartActivity"
             android:exported="true"
-            android:theme="@style/Theme.SpaceMate">
+            android:theme="@style/Theme.SpaceMate.ForceLightMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

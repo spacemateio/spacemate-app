@@ -16,22 +16,37 @@
         
         <!-- Background color -->
         <item name="android:windowBackground">@android:color/white</item>
+        
+        <!-- Force light mode -->
+        <item name="android:forceDarkAllowed">false</item>
+    </style>
+
+    <style name="Theme.SpaceMate.ForceLightMode">
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowBackground">@android:color/white</item>
     </style>
     
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Force light mode -->
+        <item name="android:forceDarkAllowed">false</item>
+        
         <!-- Pure white background -->
         <item name="windowSplashScreenBackground">@android:color/white</item>
+        <item name="android:windowBackground">@android:color/white</item>
         
         <!-- Use the new high-quality logo -->
         <item name="windowSplashScreenAnimatedIcon">@drawable/spacemate_logo_full</item>
         
-        <!-- Hide status bar for cleaner look -->
-        <item name="android:windowFullscreen">true</item>
+        <!-- Status bar -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/white</item>
         
         <!-- Smooth animation -->
         <item name="windowSplashScreenAnimationDuration">500</item>
         
         <!-- Main theme -->
-        <item name="postSplashScreenTheme">@style/Theme.SpaceMate</item>
+        <item name="postSplashScreenTheme">@style/Theme.SpaceMate.ForceLightMode</item>
     </style>
 </resources>
