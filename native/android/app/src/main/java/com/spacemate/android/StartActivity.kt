@@ -103,6 +103,7 @@ class StartActivity : AppCompatActivity() {
     private fun setupWebView() {
         webView.apply {
             settings.apply {
+                javaScriptEnabled = true
                 domStorageEnabled = true
                 cacheMode = WebSettings.LOAD_DEFAULT
                 loadWithOverviewMode = true
