@@ -337,7 +337,31 @@ class _WebViewScreenState extends State<WebViewScreen> {
                 }
               },
               shouldOverrideUrlLoading: (controller, navigationAction) async {
-                return NavigationActionPolicy.ALLOW;
+                var uri = navigationAction.request.url!;
+                var url = uri.toString();
+
+                if (url.contains('facebook.com') ||
+                    url.contains('linkedin.com') ||
+                    url.contains('twitter.com') ||
+                    url.contains('t.co')) {
+                  await launchUrl(
+                    Uri.parse(url),
+                    mode: LaunchMode.externalApplication,
+                  );
+                  return NavigationActionPolicy.CANCEL;
+                }
+
+                // Let WebView handle SpaceMate URLs
+                if (url.contains('spacemate.io')) {
+                  return NavigationActionPolicy.ALLOW;
+                }
+
+                // Open other external links in browser
+                await launchUrl(
+                  Uri.parse(url),
+                  mode: LaunchMode.externalApplication,
+                );
+                return NavigationActionPolicy.CANCEL;
               },
             ),
             if (isLoading)

@@ -75,6 +75,31 @@ class WebViewFragment : Fragment() {
             }
 
             webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                    val url = request?.url?.toString() ?: return false
+                    
+                    // Check if the URL is for social media or external sharing
+                    if (url.contains("facebook.com") || 
+                        url.contains("linkedin.com") || 
+                        url.contains("twitter.com") ||
+                        url.contains("t.co")) {
+                        // Open in external browser
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(intent)
+                        return true
+                    }
+                    
+                    // Let WebView handle SpaceMate URLs
+                    return if (url.contains("spacemate.io")) {
+                        false // Let WebView handle it
+                    } else {
+                        // Open other external links in browser
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(intent)
+                        true
+                    }
+                }
+
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
                     progressBar?.visibility = View.GONE
