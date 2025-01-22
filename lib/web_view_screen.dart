@@ -161,7 +161,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   }
 
   Future<void> _handleLoginRequest() async {
-    _onItemTapped(0);
+    // _onItemTapped(0);
 
     try {
       final url =
