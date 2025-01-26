@@ -66,7 +66,7 @@ class StartActivity : AppCompatActivity() {
     }
 
     private fun setupTermsText() {
-        val fullText = "By Selecting Agree and register, I agree to SpaceMate's Terms of Service, & acknowledge the Privacy Policy"
+        val fullText = "By Selecting \"I Agree & Continue\", I agree to SpaceMate's Terms of Service, & acknowledge the Privacy Policy"
         val spannableString = SpannableString(fullText)
 
         val termsClickableSpan = object : ClickableSpan() {

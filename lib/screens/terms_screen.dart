@@ -117,7 +117,7 @@ class _TermsScreenState extends State<TermsScreen> {
                   ),
                   children: [
                     const TextSpan(
-                      text: "By Selecting Agree and register, I agree to SpaceMate's ",
+                      text: 'By Selecting "I Agree & Continue", I agree to SpaceMate\'s ',
                     ),
                     TextSpan(
                       text: "Terms of Service",
