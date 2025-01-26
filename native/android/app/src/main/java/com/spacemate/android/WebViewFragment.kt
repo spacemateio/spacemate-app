@@ -78,11 +78,13 @@ class WebViewFragment : Fragment() {
                 override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
                     val url = request?.url?.toString() ?: return false
                     
-                    // Check if the URL is for social media or external sharing
+                    // Check if the URL is for social media, external sharing, or legal pages
                     if (url.contains("facebook.com") || 
                         url.contains("linkedin.com") || 
                         url.contains("twitter.com") ||
-                        url.contains("t.co")) {
+                        url.contains("t.co") ||
+                        url.contains("/corporate/terms-of-service") ||
+                        url.contains("/corporate/privacy-policy")) {
                         // Open in external browser
                         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                         startActivity(intent)
@@ -90,14 +92,14 @@ class WebViewFragment : Fragment() {
                     }
                     
                     // Let WebView handle SpaceMate URLs
-                    return if (url.contains("spacemate.io")) {
-                        false // Let WebView handle it
-                    } else {
-                        // Open other external links in browser
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                        startActivity(intent)
-                        true
+                    if (url.contains("spacemate.io")) {
+                        return false // Let WebView handle it
                     }
+                    
+                    // Open other external links in browser
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    startActivity(intent)
+                    return true
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {

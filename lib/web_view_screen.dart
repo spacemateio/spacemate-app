@@ -343,10 +343,13 @@ class _WebViewScreenState extends State<WebViewScreen> {
                 var uri = navigationAction.request.url!;
                 var url = uri.toString();
 
+                // Open social media and legal pages in external browser
                 if (url.contains('facebook.com') ||
                     url.contains('linkedin.com') ||
                     url.contains('twitter.com') ||
-                    url.contains('t.co')) {
+                    url.contains('t.co') ||
+                    url.contains('/corporate/terms-of-service') ||
+                    url.contains('/corporate/privacy-policy')) {
                   await launchUrl(
                     Uri.parse(url),
                     mode: LaunchMode.externalApplication,
@@ -356,6 +359,10 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
                 // Let WebView handle SpaceMate URLs
                 if (url.contains('spacemate.io')) {
+                  return NavigationActionPolicy.ALLOW;
+                }
+
+                if (url.contains('stripe') || url.contains('hcaptcha')) {
                   return NavigationActionPolicy.ALLOW;
                 }
 
