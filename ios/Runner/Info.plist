@@ -61,9 +61,15 @@
 			<dict>
 				<key>CFBundleURLSchemes</key>
 				<array>
-					<string>com.spacemate.app</string>
+					<string>com.spacemate.ios</string>
 				</array>
 			</dict>
+            <dict>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>com.spacemate.app</string>
+                </array>
+            </dict>
 		</array>
 		<key>UIStatusBarHidden</key>
 		<false/>

@@ -121,6 +121,9 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
       developer.log('Sent message to WebView: $message', name: 'WebView');
     } catch (e, stackTrace) {
+      await _webViewController?.loadUrl(
+          urlRequest: URLRequest(
+              url: WebUri("$baseUrl/storage")));
       developer.log('Error sending message to WebView',
           name: 'WebView', error: e, stackTrace: stackTrace);
     }
