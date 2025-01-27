@@ -24,6 +24,10 @@
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
+		<key>NSCameraUsageDescription</key>
+		<string>SpaceMate needs access to your camera to update your profile photo.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>SpaceMate needs access to your photo library to update your profile photo.</string>
 		<key>UILaunchStoryboardName</key>
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
