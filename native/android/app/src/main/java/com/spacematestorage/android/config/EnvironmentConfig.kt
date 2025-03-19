@@ -1,4 +1,4 @@
-package com.spacemate.android.config
+package com.spacematestorage.android.config
 
 enum class Environment {
     DEV, TEST, PROD

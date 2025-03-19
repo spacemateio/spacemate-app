@@ -1,4 +1,4 @@
-package com.spacemate.android
+package com.spacematestorage.android
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -12,7 +12,7 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import android.util.Log
 import org.json.JSONObject
-import com.spacemate.android.config.EnvironmentConfig
+import com.spacematestorage.android.config.EnvironmentConfig
 
 class WebViewFragment : Fragment() {
     private var webView: WebView? = null

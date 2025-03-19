@@ -1,4 +1,4 @@
-package com.spacemate.android
+package com.spacematestorage.android
 
 import android.content.Intent
 import android.content.SharedPreferences

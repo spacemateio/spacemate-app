@@ -1,15 +1,13 @@
-package com.spacemate.android
+package com.spacematestorage.android
 
 import android.content.Intent
 import android.os.Bundle
 import android.net.Uri
 import android.webkit.CookieManager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
-import com.spacemate.android.config.EnvironmentConfig
-import com.spacemate.android.config.Environment
+import com.spacematestorage.android.config.EnvironmentConfig
+import com.spacematestorage.android.config.Environment
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import android.os.Handler
 import android.os.Looper

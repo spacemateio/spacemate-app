@@ -10,11 +10,11 @@ def keystoreProperties = new Properties()
    }
 
 android {
-    namespace 'com.spacemate.android'
+    namespace 'com.spacematestorage.android'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.spacemate.android"
+        applicationId "com.spacematestorage.android"
         minSdk 24
         targetSdk 34
         versionCode 11
