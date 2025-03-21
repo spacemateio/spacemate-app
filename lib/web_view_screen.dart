@@ -42,7 +42,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
     ),
     NavigationItem(
       icon: 'assets/icons/home.svg',
-      label: 'Rents',
+      label: 'Rentals',
       route: '/account/reservation',
     ),
     NavigationItem(
